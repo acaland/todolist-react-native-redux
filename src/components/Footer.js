@@ -17,7 +17,9 @@ const styles = {
   wrapper: {
     height: 60,
     backgroundColor: 'darkgray',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   button: {
     fontSize: 20

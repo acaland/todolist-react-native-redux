@@ -1,13 +1,16 @@
 import React from 'react';
-import { Text, Button } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { setVisibilityFilter } from '../actions'
 
 const Toggle = ({ title, filter, active, onSelected }) => {
   if (active) {
-    return <Text style={{ color: 'red', fontSize: 20 }}>{title}</Text>
+    return <Text style={{ color: 'red', fontSize: 20, fontWeight: 'bold' }}>{title}</Text>
   } else {
-    return <Button title={title} onPress={onSelected} />
+    return (
+      <TouchableOpacity onPress={onSelected}>
+          <Text style={{ fontSize: 20 }}>{title}</Text>
+      </TouchableOpacity>)
   }
 };
 
