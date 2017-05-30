@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import TodoList2 from './components/TodoList2';
+import VisibleTodoList from './containers/VisibleTodoList';
 import appReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -33,7 +34,7 @@ class App extends React.Component {
         <View style={styles.container}>
           <Header title="TodoList App"/>
           <AddTodo />
-          <TodoList2 todolist={[]}/>
+          <VisibleTodoList todolist={[]}/>
           { /*<VisibileTodoList /> */}
           <Footer />
         </View>
