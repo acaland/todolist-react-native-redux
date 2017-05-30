@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
 
 class AddTodo extends React.Component {
   state = { text: '' }
 
   onAddTodo() {
     // alert(this.state.text);
+    this.props.onAddTodo(this.state.text);
     this.setState({ text: ''});
     return;
   }
@@ -45,4 +48,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddTodo;
+// const mapDispatchToProps = dispatch => ({
+//   onAddTodo: (text) => dispatch(addTodo(text))
+// });
+
+// export default connect(null, mapDispatchToProps)(AddTodo);
+
+export default connect(null, { onAddTodo: addTodo })(AddTodo);
