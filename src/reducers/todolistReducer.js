@@ -1,4 +1,4 @@
-import {ADD_TODO, TOGGLE_TODO } from '../actions/types';
+import {ADD_TODO, TOGGLE_TODO, DOWNLOAD_TODOLIST } from '../actions/types';
 
 const initialState = [];
 
@@ -18,8 +18,9 @@ export default function todolistReducer(state = initialState, action) {
           })
         }
         return todo
-      }
-      );
+      });
+    case DOWNLOAD_TODOLIST:
+      return action.payload || [];
     default:
       return state;
   }

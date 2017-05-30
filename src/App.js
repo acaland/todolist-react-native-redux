@@ -4,10 +4,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import TodoList2 from './components/TodoList2';
 import appReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
+import { downloadTodolist } from './actions';
 
 const initialState = {
   todolist: [{
@@ -23,13 +26,14 @@ const initialState = {
 
 class App extends React.Component {
   render() {
-    const store = createStore(appReducer, initialState, applyMiddleware(logger));
+    const store = createStore(appReducer,  applyMiddleware(logger, ReduxThunk));
+    // store.dispatch(downloadTodolist());
     return (
       <Provider store={store}>
         <View style={styles.container}>
           <Header title="TodoList App"/>
           <AddTodo />
-          <TodoList todolist={[]}/>
+          <TodoList2 todolist={[]}/>
           { /*<VisibileTodoList /> */}
           <Footer />
         </View>

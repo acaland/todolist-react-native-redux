@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from './types';
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, DOWNLOAD_TODOLIST } from './types';
 
 let nextTodoId = 0
 
@@ -25,3 +25,20 @@ export const setVisibilityFilter = filter => {
     filter: filter
   }
 };
+
+export const downloadTodolist = () => {
+  return (dispatch) => {
+    fetch('https://www.dmi.unict.it/~calanducci/LAP2/initialTodolist.json',
+      {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
+      .then(response => response.json())
+      .then(responseData => dispatch({
+        type: DOWNLOAD_TODOLIST,
+        payload: responseData.todolist
+      }))
+      .catch((error) => dispatch({ type: 'NETWORK_ERROR' }))
+  }
+}
