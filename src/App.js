@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import appReducer from './reducers';
@@ -29,8 +30,8 @@ class App extends React.Component {
           <Header title="TodoList App"/>
           <AddTodo />
           <TodoList todolist={[]}/>
-          { /*<VisibileTodoList />
-          <Footer />*/}
+          { /*<VisibileTodoList /> */}
+          <Footer />
         </View>
       </Provider>
     );
