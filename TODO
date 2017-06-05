@@ -1,0 +1,42 @@
+- aggiungiamo react navigation
+- aggiungiamo login form
+- integrazione con firebase authentication
+- creazione screen TodoCreate.js
+  - creazione new todoCreate action:
+
+  export const todoCreate = ({ name, location, duedate, navigateBack }) => {
+const { currentUser } = firebase.auth();
+return (dispatch) => {
+  firebase.database().ref(`/users/${currentUser.uid}/todolist`)
+    .push({ name, phone, shift })
+    .then(() => {
+      dispatch({ type: TODO_CREATED });
+      navigateBack();
+    })
+}
+};
+
+- lettura todolist da firebase
+
+export const employeesFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/todolist`)
+      .on('value', snapshot => {
+        dispatch({ type: TODOLIST_FETCH_SUCCESS, payload: snapshot.val()})
+      })
+  }
+};
+
+aggiungere regole di sicurezza a firebase
+- {
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    }
+  }
+}

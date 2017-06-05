@@ -6,7 +6,7 @@ import VisibleTodolist from '../containers/VisibleTodolist';
 
 const HomeScreen = () => (
   <View style={styles.container}>
-    <Header style={styles.header} title="Todo List App"/>
+    {/*<Header style={styles.header} title="Todo List App"/> */ }
       <AddTodo />
       <VisibleTodolist />
       { /*
@@ -14,6 +14,11 @@ const HomeScreen = () => (
         <Footer />*/}
   </View>
 );
+
+HomeScreen.navigationOptions = {
+  title: 'TodoList',
+  headerLeft: null
+}
 
 const styles = StyleSheet.create({
   container: {
