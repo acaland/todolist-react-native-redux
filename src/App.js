@@ -1,18 +1,32 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import AddTodo from './components/AddTodo';
-import VisibleTodolist from './containers/VisibleTodolist';
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import { logger } from 'redux-logger'
 import ReduxThunk from 'redux-thunk';
 import { downloadInitialTodolist } from './actions';
+import firebase from 'firebase';
+import { StackNavigator } from 'react-navigation';
+import HomeScreen from './screens/HomeScreen';
+import LoginForm from './screens/LoginForm';
+// import TodoCreate from './screens/TodoCreate';
 
 const initialState = {};
 
 class App extends React.Component {
+  componentWillMount() {
+    var config = {
+      apiKey: "AIzaSyBbz6q4vltHA_K3KLHQDBQC2ITY_aKGaBQ",
+      authDomain: "todolist-rn-unict-d73b4.firebaseapp.com",
+      databaseURL: "https://todolist-rn-unict-d73b4.firebaseio.com",
+      projectId: "todolist-rn-unict-d73b4",
+      storageBucket: "todolist-rn-unict-d73b4.appspot.com",
+      messagingSenderId: "465570866758"
+    };
+    firebase.initializeApp(config);
+  }
   render() {
     const store = createStore(
       appReducer,
@@ -20,31 +34,21 @@ class App extends React.Component {
       applyMiddleware(logger, ReduxThunk)
     );
     store.dispatch(downloadInitialTodolist());
+
+    const MainNavigator = StackNavigator({
+      login: { screen: LoginForm },
+      home: { screen: HomeScreen },
+      // todoCreate: { screen: TodoCreate }
+    });
+
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-            <Header style={styles.header} title="Todo List App"/>
-              <AddTodo />
-              <VisibleTodolist />
-          { /*
-          <VisibileTodoList />
-          <Footer />*/}
-        </View>
+        <MainNavigator />
       </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
-  },
-  header: {
-    marginTop: 20
-  }
-});
+
 
 export default App;
