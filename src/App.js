@@ -11,7 +11,7 @@ import firebase from 'firebase';
 import { StackNavigator } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
 import LoginForm from './screens/LoginForm';
-// import TodoCreate from './screens/TodoCreate';
+import TodoCreate from './screens/TodoCreate';
 
 const initialState = {};
 
@@ -33,12 +33,13 @@ class App extends React.Component {
       initialState,
       applyMiddleware(logger, ReduxThunk)
     );
-    store.dispatch(downloadInitialTodolist());
+    // store.dispatch(downloadInitialTodolist());
 
     const MainNavigator = StackNavigator({
+      // todoCreate: { screen: TodoCreate },
       login: { screen: LoginForm },
       home: { screen: HomeScreen },
-      // todoCreate: { screen: TodoCreate }
+      todoCreate: { screen: TodoCreate }
     });
 
     return (

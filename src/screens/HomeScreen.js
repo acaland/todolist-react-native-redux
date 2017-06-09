@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import Header from '../components/Header';
 import AddTodo from '../components/AddTodo';
 import VisibleTodolist from '../containers/VisibleTodolist';
@@ -7,7 +7,7 @@ import VisibleTodolist from '../containers/VisibleTodolist';
 const HomeScreen = () => (
   <View style={styles.container}>
     {/*<Header style={styles.header} title="Todo List App"/> */ }
-      <AddTodo />
+      {/*<AddTodo /> */}
       <VisibleTodolist />
       { /*
         <VisibileTodoList />
@@ -15,10 +15,13 @@ const HomeScreen = () => (
   </View>
 );
 
-HomeScreen.navigationOptions = {
+HomeScreen.navigationOptions = ({navigation}) => ({
   title: 'TodoList',
-  headerLeft: null
-}
+  headerLeft: null,
+  headerRight: <Button title="Add"
+      onPress={() => navigation.navigate('todoCreate')}
+    />
+})
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,10 @@
-import { ADD_TODO, TOGGLE_TODO, DOWNLOAD_INITIALTODOLIST, DOWNLOAD_INITIALTODOLIST_START } from '../actions/types';
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  DOWNLOAD_INITIALTODOLIST,
+  DOWNLOAD_INITIALTODOLIST_START,
+  TODOLIST_FETCH_SUCCESS
+} from '../actions/types';
 
 const initialState = []
 
@@ -24,6 +30,8 @@ export default function todolistReducer(state = initialState, action) {
       }
       );
     case DOWNLOAD_INITIALTODOLIST:
+      return action.payload
+    case TODOLIST_FETCH_SUCCESS:
       return action.payload
     default:
       return state;
