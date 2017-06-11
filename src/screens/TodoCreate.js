@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Input, Button } from '../components/common';
 import DatePicker from 'react-native-datepicker'
-import { View } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { todoCreate } from '../actions/TodoActions';
+import { ImagePicker } from 'expo';
 
 class TodoCreate extends Component {
   static navigationOptions = {
@@ -12,8 +13,22 @@ class TodoCreate extends Component {
   state = {
     title: '',
     location: '',
-    duedate: new Date().toISOString()
+    duedate: new Date().toISOString(),
+    image: 'https://facebook.github.io/react/img/logo_og.png'
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
 
   render() {
     return (
@@ -62,7 +77,18 @@ class TodoCreate extends Component {
             />
 
           </CardSection>
-
+            <Image />
+          <CardSection>
+            <TouchableOpacity
+              onPress={this._pickImage}
+              >
+              <Image
+                source={{ uri: this.state.image }}
+                resizeMode="cover"
+                style={{ height: 200, width: 300 }}
+              />
+            </TouchableOpacity>
+          </CardSection>
 
           <CardSection>
             <Button onPress={() => this.props.todoCreate({
