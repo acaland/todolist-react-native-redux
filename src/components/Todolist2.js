@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { ListView } from 'react-native';
-import Todo from './Todo';
-import { Spinner } from './common';
+import React, { Component } from "react";
+import { ListView, Alert } from "react-native";
+import Todo from "./Todo";
+import { Spinner } from "./common";
 
 class Todolist2 extends Component {
-
   componentWillMount() {
     this.props.todolistFetch();
     this.createDataSource(this.props);
@@ -17,22 +16,32 @@ class Todolist2 extends Component {
 
   createDataSource({ todolist }) {
     const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2 ) => r1 !== r2
+      rowHasChanged: (r1, r2) => r1 !== r2
     });
 
     this.dataSource = ds.cloneWithRows(todolist);
   }
 
+  deleteTodo(todoId) {
+    Alert.alert(
+      'Delete todo',
+      'Are you sure?',
+      [
+        { text: 'Cancel', style: 'cancel'},
+        { text: 'Yes', onPress: () => this.props.delete(todoId) }
+      ]
+    );
+  }
+
   renderRow(todo) {
-    return (
-      <Todo item={todo} />
-    )
+    return <Todo item={todo} onLongPress={() => this.deleteTodo(todo.id)}
+      onClick={() => this.props.onClick(todo)} />;
   }
 
   render() {
-    // console.log(this.props);
+    // console.log("in todolist2", this.props);
     if (this.props.isLoading) {
-      return <Spinner />
+      return <Spinner />;
     } else {
       return (
         <ListView
@@ -40,7 +49,7 @@ class Todolist2 extends Component {
           dataSource={this.dataSource}
           renderRow={this.renderRow.bind(this)}
         />
-      )
+      );
     }
   }
 }

@@ -18,6 +18,35 @@ export const todoCreate = ({ title, location, duedate, navigateBack }) => {
   }
 }
 
+export const todoEdit = ({ id, title, location, duedate, image, navigateBack }) => {
+  
+  const { currentUser } = firebase.auth();
+  console.log('currentUser', currentUser.uid);
+  navigateBack();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/todolist/${id}`)
+      .set({ title, location, duedate, image })
+      .then(() => dispatch({ type: 'TODO_EDIT'} ))
+  }
+}
+
+
+export const todoDelete = (todoId) => {
+  
+  const { currentUser } = firebase.auth();
+  // console.log('currentUser', currentUser.uid);
+  // console.log("In todoDelete", todoId);
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/todolist/${todoId}`)
+      .remove()
+      .then(() => dispatch({ type: 'TODO_DELETE'} ))
+  }
+}
+
+
+
 export const todolistFetch = () => {
 
   console.log("carichiamo le todo da firebase");

@@ -9,8 +9,8 @@ import {
 const initialState = []
 
 export default function todolistReducer(state = initialState, action) {
-  console.log("sono nel reducer: ", action)
-  console.log("value of ADD_TODO: ", ADD_TODO);
+  // console.log("sono nel reducer: ", action)
+  // console.log("value of ADD_TODO: ", ADD_TODO);
   switch(action.type) {
     case ADD_TODO:
       console.log("sono nel case giusto?")
@@ -32,7 +32,7 @@ export default function todolistReducer(state = initialState, action) {
     case DOWNLOAD_INITIALTODOLIST:
       return action.payload
     case TODOLIST_FETCH_SUCCESS:
-      return action.payload
+      return action.payload || {}
     default:
       return state;
   }

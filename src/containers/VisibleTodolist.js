@@ -2,7 +2,7 @@
 import Todolist2 from '../components/Todolist2';
 import { connect } from 'react-redux';
 // import { toggleTodo } from '../actions';
-import { todolistFetch } from '../actions/TodoActions';
+import { todolistFetch, todoDelete } from '../actions/TodoActions';
 
 // const mapStateToProps = state => ({
 //   todolist: state.todolist,
@@ -15,7 +15,7 @@ import { todolistFetch } from '../actions/TodoActions';
 
 const mapStateToProps = state => {
   const todolist = Object.keys(state.todolist).map(id => {
-    return { ...state.todolist[id] }
+    return { ...state.todolist[id], id }
   });
   return { todolist, isLoading: state.loading }
 }
@@ -24,7 +24,7 @@ const mapStateToProps = state => {
 const VisibleTodoList = connect(
   mapStateToProps,
   // mapDispatchToProps
-  { todolistFetch }
+  { todolistFetch, delete: todoDelete }
 ) (Todolist2);
 
 export default VisibleTodoList;
