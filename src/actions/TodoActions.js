@@ -52,6 +52,7 @@ export const todolistFetch = () => {
   console.log("carichiamo le todo da firebase");
   const { currentUser } = firebase.auth();
   console.log('currentUser', currentUser.uid);
+  
   return (dispatch) => {
     dispatch({ type: DOWNLOAD_INITIALTODOLIST_START });
     firebase.database().ref(`/users/${currentUser.uid}/todolist`)
@@ -59,5 +60,6 @@ export const todolistFetch = () => {
         dispatch({ type: TODOLIST_FETCH_SUCCESS, payload: snapshot.val()})
         dispatch({ type: DOWNLOAD_INITIALTODOLIST_SUCCESS })
       })
+    
   }
 };

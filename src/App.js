@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -42,10 +42,15 @@ class App extends React.Component {
       home: { screen: HomeScreen },
       todoCreate: { screen: TodoCreate },
       todoEdit: { screen: TodoEdit }
+    },{
+        cardStyle: {
+          paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+      }
     });
 
     return (
       <Provider store={store}>
+ 
         <MainNavigator />
       </Provider>
     );

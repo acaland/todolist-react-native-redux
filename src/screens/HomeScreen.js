@@ -17,9 +17,12 @@ const HomeScreen = ({ navigation }) => (
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
   title: "TodoList",
-  headerLeft: <Button title="Login" onPress={() => navigation.goBack()} />,
+  // headerLeft: <Button title="Login" onPress={() => navigation.goBack()} />,
   headerRight: (
-    <Button title="Add" onPress={() => navigation.navigate("todoCreate")} />
+    <Button 
+      title="Add" 
+      style={{ marginRight: 20 }}
+      onPress={() => navigation.navigate("todoCreate")} />
   )
 });
 

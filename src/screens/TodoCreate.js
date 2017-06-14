@@ -80,12 +80,18 @@ class TodoCreate extends Component {
             <Image />
           <CardSection>
             <TouchableOpacity
+              style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  flex: 1
+                }}
               onPress={this._pickImage}
               >
               <Image
                 source={{ uri: this.state.image }}
-                resizeMode="cover"
-                style={{ height: 200, width: 300 }}
+                // resizeMode="cover"
+                style={{ height: 200, width: "100%" }}
               />
             </TouchableOpacity>
           </CardSection>
