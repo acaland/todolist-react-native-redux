@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   ADD_TODO,
   TOGGLE_TODO,
@@ -14,6 +15,15 @@ export default function todolistReducer(state = initialState, action) {
   switch(action.type) {
     case ADD_TODO:
       console.log("sono nel case giusto?")
+=======
+import {ADD_TODO, TOGGLE_TODO, DOWNLOAD_TODOLIST } from '../actions/types';
+
+const initialState = [];
+
+export default function todolistReducer(state = initialState, action) {
+	switch(action.type) {
+    case ADD_TODO:
+>>>>>>> master
       return state.concat({
       	title: action.title,
         id: action.id,
@@ -27,12 +37,18 @@ export default function todolistReducer(state = initialState, action) {
           })
         }
         return todo
+<<<<<<< HEAD
       }
       );
     case DOWNLOAD_INITIALTODOLIST:
       return action.payload
     case TODOLIST_FETCH_SUCCESS:
       return action.payload || {}
+=======
+      });
+    case DOWNLOAD_TODOLIST:
+      return action.payload || [];
+>>>>>>> master
     default:
       return state;
   }
