@@ -34,8 +34,11 @@ class Todolist2 extends Component {
   }
 
   renderRow(todo) {
-    return <Todo item={todo} onLongPress={() => this.deleteTodo(todo.id)}
-      onClick={() => this.props.onClick(todo)} />;
+    return <Todo item={todo} 
+      onLongPress={() => this.deleteTodo(todo.id)}
+      onClick={() => this.props.onClick(todo)} 
+      onToggle={() => this.props.toggleTodo(todo)}
+      />;
   }
 
   render() {

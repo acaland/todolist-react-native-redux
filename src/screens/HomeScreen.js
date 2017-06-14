@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import AddTodo from "../components/AddTodo";
 import VisibleTodolist from "../containers/VisibleTodolist";
 
@@ -9,6 +10,7 @@ const HomeScreen = ({ navigation }) => (
     {/*<Header style={styles.header} title="Todo List App"/> */}
     {/*<AddTodo /> */}
     <VisibleTodolist onClick={todo => navigation.navigate("todoEdit", { todo })} />
+    <Footer />
     {/*
         <VisibileTodoList />
         <Footer />*/}
@@ -21,7 +23,6 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   headerRight: (
     <Button 
       title="Add" 
-      style={{ marginRight: 20 }}
       onPress={() => navigation.navigate("todoCreate")} />
   )
 });

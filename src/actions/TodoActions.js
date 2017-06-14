@@ -31,6 +31,18 @@ export const todoEdit = ({ id, title, location, duedate, image, navigateBack }) 
   }
 }
 
+export const todoToggle = (todo) => {
+  
+  const { currentUser } = firebase.auth();
+  console.log('currentUser', currentUser.uid);
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/todolist/${todo.id}`)
+      .set({ ...todo, done: !todo.done })
+      .then(() => dispatch({ type: 'TODO_TOGGLE'} ))
+  }
+}
+
 
 export const todoDelete = (todoId) => {
   

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { todolistFetch, todoDelete } from '../actions/TodoActions';
+import { todolistFetch, todoDelete, todoToggle } from '../actions/TodoActions';
 import { VisibilityFilters } from '../actions/types';
 import Todolist2 from '../components/Todolist2';
 
@@ -31,7 +31,7 @@ const mapStateToProps = state => {
 const VisibleTodoList = connect(
   mapStateToProps,
   // mapDispatchToProps
-  { todolistFetch, delete: todoDelete }
+  { todolistFetch, delete: todoDelete, toggleTodo: todoToggle }
 ) (Todolist2);
 
 

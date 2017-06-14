@@ -16,7 +16,7 @@ const Footer = () => (
 const styles = {
   wrapper: {
     height: 60,
-    backgroundColor: 'darkgray',
+    backgroundColor: '#efeff2',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'

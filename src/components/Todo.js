@@ -1,12 +1,13 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 
-const Todo = ({ item, onClick, onLongPress }) => {
+const Todo = ({ item, onClick, onToggle, onLongPress }) => {
   const isDone = { textDecorationLine: item.done ? "line-through" : "none" };
   return (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={onClick}
+      onPress={onToggle}
       onLongPress={onLongPress}
     >
       <Image
@@ -18,6 +19,13 @@ const Todo = ({ item, onClick, onLongPress }) => {
       <Text style={[styles.text, isDone]}>
         {item.title}
       </Text>
+      <MaterialIcons 
+        name="chevron-right" 
+        size={24} 
+        color="black" 
+        style={{ position: 'absolute', right: 0 }}
+        onPress={onClick}
+      />
     </TouchableOpacity>
   );
 };
