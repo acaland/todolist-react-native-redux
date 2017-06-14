@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { toggleTodo, downloadTodolist } from '../actions';
+import { todolistFetch, todoDelete } from '../actions/TodoActions';
 import { VisibilityFilters } from '../actions/types';
-import TodoList2 from '../components/TodoList2';
+import Todolist2 from '../components/Todolist2';
 
 function filterTodolist(todolist, filter) {
   const { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } = VisibilityFilters;
@@ -17,18 +17,22 @@ function filterTodolist(todolist, filter) {
   }
 }
 
-const mapStateToProps = state => ({
-  todolist: filterTodolist(state.todolist, state.filter)
-});
+const mapStateToProps = state => {
+  const todolist = Object.keys(state.todolist).map(id => {
+    return { ...state.todolist[id], id }
+  });
+  return { 
+    todolist: filterTodolist(todolist, state.filter), 
+    isLoading: state.loading
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  onToggleTodo: (id) => dispatch(toggleTodo(id)),
-  downloadTodolist: () => dispatch(downloadTodolist())
-});
 
- const VisibleTodoList = connect(
+const VisibleTodoList = connect(
   mapStateToProps,
-  mapDispatchToProps
-) (TodoList2);
+  // mapDispatchToProps
+  { todolistFetch, delete: todoDelete }
+) (Todolist2);
+
 
 export default VisibleTodoList;
